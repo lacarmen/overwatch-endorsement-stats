@@ -1,0 +1,22 @@
+.body-container {
+  font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 72px;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.125em;
+  color: #333;
+  line-height: 1.5em;
+}
+
+.error {
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid #ffa39e;
+  background-color: #fff1f0;
+  color: rgba(0,0,0,.65);
+  position: relative;
+  margin: 10px 0;
+  padding: 8px 15px;
+  border-radius: 4px;
+}
