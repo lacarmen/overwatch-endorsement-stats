@@ -6,7 +6,8 @@
 
   :dependencies [[clj-http "3.9.0"]
                  [cljs-ajax "0.7.3"]
-                 [cljsjs/chartjs "2.7.0-0"]
+                 [cljsjs/react "16.4.0-0"]
+                 [cljsjs/react-chartjs-2 "2.7.0-0"]
                  [compojure "1.6.1"]
                  [hiccup "1.0.5"]
                  [hickory "0.7.1"]
@@ -69,8 +70,7 @@
   {:http-server-root "public"
    :server-port 3449
    :nrepl-port 7002
-   :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"
-                      ]
+   :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
    :css-dirs ["resources/public/css"]
    :ring-handler owe.handler/app}
 

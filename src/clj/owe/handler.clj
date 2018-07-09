@@ -32,14 +32,13 @@
            :crossorigin "anonymous"}]
    (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))])
 
-
-
 (defn loading-page []
   (html5
     (head)
     [:body {:class "body-container"}
      mount-target
      (include-js "/js/app.js")]))
+
 
 ;; -------------------------
 ;; Stats
@@ -48,6 +47,9 @@
    :teammate      "EndorsementIcon-border--teammate"
    :sportsmanship "EndorsementIcon-border--sportsmanship"})
 
+(defn ->int [s]
+  (Integer/parseInt s))
+
 (defn get-count
   [htree type]
   (-> (s/select
@@ -55,7 +57,8 @@
         htree)
       first
       :attrs
-      :data-value))
+      :data-value
+      ->int))
 
 (defn get-total
   [htree]
@@ -64,7 +67,8 @@
         htree)
       first
       :attrs
-      :data-total))
+      :data-total
+      ->int))
 
 (defn get-level
   [htree]
@@ -74,7 +78,8 @@
         htree)
       first
       :content
-      first))
+      first
+      ->int))
 
 (defn compute-stats
   [platform id]

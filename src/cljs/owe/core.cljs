@@ -1,10 +1,9 @@
 (ns owe.core
   (:require
     [ajax.core :refer [GET]]
-    [cljsjs.chartjs]
+    cljsjs.react-chartjs-2
     [clojure.string :as string]
-    [hickory.core :refer [parse as-hickory]]
-    [hickory.select :as s]
+    [goog.object :as obj]
     [reagent.core :as r]))
 
 
@@ -21,6 +20,14 @@
         :handler         (fn [result]
                            (reset! stats result))
         :error-handler   #(reset! error? true)}))
+
+(def doughnut-chart (r/adapt-react-class (obj/get js/ReactChartjs2 "Doughnut")))
+
+(defn endorsement-chart [stats]
+  (let [{:keys [shotcaller teammate sportsmanship]} @stats]
+    [doughnut-chart {:data {:labels   ["Shotcaller" "Teammate" "Sportsmanship"]
+                            :datasets [{:data            [shotcaller teammate sportsmanship]
+                                        :backgroundColor ["#f29413" "#c81ef5" "#40ce43"]}]}}]))
 
 (defn page []
   (r/with-let [opts   (r/atom {:platform "pc"})
@@ -49,9 +56,8 @@
        "Submit"]]
      (if @error?
        [:div.error "An error occurred while processing your request. Please try again."])
-     [:p "TODO: charts and errors"]
-     [:p (str @opts)]
-     [:p (str @stats)]]))
+     (if @stats
+       [endorsement-chart stats])]))
 
 
 ;; https://purecss.io/
